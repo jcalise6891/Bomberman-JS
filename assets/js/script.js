@@ -1,8 +1,11 @@
-let j1 = null;
-let footstep = new Audio("./assets/sound/sfx_footstep.wav");
-let wall = new Audio('./assets/sound/sfx_wall.wav');
+let j1          = null;
+let b           = null;
+let ennemies    = [];
 
-wall.volume = 0.05;
+let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
+let wall        = new Audio('./assets/sound/sfx_wall.wav');
+
+wall.volume     = 0.05;
 footstep.volume = 0.05;
 
 window.onload=init;
@@ -35,6 +38,12 @@ function init(){
     j1.style.left="0px";
     j1.style.top="0px";
     j1.style.backgroundImage="url('./assets/img/bomberman_idle.png')"
+
+    for(let i = 0; i < 6; i++ )
+    {
+        ennemies[i] = document.getElementById('e'+(i+1));
+        ennemies[i].style.backgroundImage="url('./assets/img/slime.gif')";
+    }
 }
 
 function moveLeft(){
