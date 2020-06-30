@@ -23,21 +23,18 @@
     background-color: aquamarine;
     height:800px;
     width:800px;
-    z-index: 1;
 }
 
 #player{
-    position:relative;
+    position:absolute;
     height:50px;
     width:50px;
-    z-index: 2;
 }
 
 .slime{
-    position: relative;
+    position: absolute;
     height:50px;
     width:50px;
-    z-index:2;
 }
 
 p{

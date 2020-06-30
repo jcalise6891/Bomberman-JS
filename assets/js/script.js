@@ -37,13 +37,22 @@ function init(){
     j1 = document.getElementById('player');
     j1.style.left="0px";
     j1.style.top="0px";
-    j1.style.backgroundImage="url('./assets/img/bomberman_idle.png')"
+    j1.style.backgroundImage="url('./assets/img/bomberman_idle.png')";
 
     for(let i = 0; i < 6; i++ )
-    {
+    {     
         ennemies[i] = document.getElementById('e'+(i+1));
+
         ennemies[i].style.backgroundImage="url('./assets/img/slime.gif')";
+
+        ennemies[i].style.left="0px";
+        ennemies[i].style.top="0px";        
+ 
+        ennemies[i].style.left =parseInt(ennemies[i].style.left)+rand(0,800,50)+'px';
+        ennemies[i].style.top =parseInt(ennemies[i].style.top)+rand(0,800,50)+'px';
+       
     }
+
 }
 
 function moveLeft(){
@@ -88,6 +97,27 @@ function moveDown(){
     else{
         wall.play();
     }
+}
+
+function rand(min, max, step) {
+    let delta,
+        range,
+        rand;
+    if (arguments.length < 2) {
+        max = min;
+        min = 0;
+    }
+    if (!step) {
+        step = 1;
+    }
+    delta = max - min;
+    range = delta / step;
+    rand = Math.random();
+    rand *= range;
+    rand = Math.floor(rand);
+    rand *= step;
+    rand += min;
+    return rand;
 }
 
 
