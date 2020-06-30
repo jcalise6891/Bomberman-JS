@@ -14,12 +14,12 @@ document.getElementById('start').addEventListener("click", function(){          
     this.style.display="none";
     document.getElementById('overlay').style.display="none";
 
-    window.addEventListener("keydown",function(Event){                                          // Détection des touches du clavier pour les différents mouvements du joueur
+    let _listener = function(Event){                                                        // Ta mère le concombre, cordialement, saleté d'AddEventListener... 
 
         let key_code = Event.keyCode;
-
+    
         console.log('touche '+ key_code);
-
+    
         switch(key_code){
             case 37: // Gauche
                 moveLeft(j1);
@@ -34,8 +34,10 @@ document.getElementById('start').addEventListener("click", function(){          
                 moveDown(j1);
                 break;
         }
-    });
+    
+    }
 
+    window.addEventListener("keydown", _listener)                                         // Détection des touches du clavier pour les différents mouvements du joueur
 
     let inter = setInterval(() => {
 
@@ -62,7 +64,7 @@ document.getElementById('start').addEventListener("click", function(){          
     document.getElementById('stop').addEventListener("click", function(){
 
         clearInterval(inter);
-        window.removeEventListener("keydown", function);
+        window.removeEventListener("keydown", _listener);
     
     },true);
 
@@ -163,9 +165,3 @@ function rand(min, max, step) {                                 // Méthode qui 
     rand += min;
     return rand;
 }
-
-
-
-
-
-
