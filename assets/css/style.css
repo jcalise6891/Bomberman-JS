@@ -102,6 +102,17 @@ p{
     cursor:pointer;
     z-index: 3;
 }
+.game #reset{
+    color: white;
+    font-family: "myPixel",sans-serif;
+    border: 0.05rem solid black;
+    background-color:#494D5F;
+    box-shadow: 5px 10px 8px black;
+    text-decoration: none;
+    padding:1rem 2rem;
+    cursor:pointer;
+    z-index: 3;
+}
 
 .game #stop:hover{
     background-color: white;
@@ -113,5 +124,18 @@ p{
 }
 
 .game #stop:active{
+    color:blue;
+}
+
+.game #reset:hover{
+    background-color: white;
+    color:black;
+}
+
+.game #reset:focus{
+    outline:0;
+}
+
+.game #reset:active{
     color:blue;
 }

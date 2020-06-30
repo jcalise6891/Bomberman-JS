@@ -1,8 +1,14 @@
 let j1          = null;                                                                     // Div Joueur
 let ennemies    = [];
-let inter       = null;                                                                       // Tableau contenant les différentes div ennemies
+let inter       = null;                                                                     // Tableau contenant les différentes div ennemies
 let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
+let lp          = 0;                                                                        // Nb de Point de vie
+
+let ePos        = new Array();
+    ePos['div']     = new Array();
+    ePos['x']       = new Array()
+    ePos['y']       = new Array();                                                             // Tableau contenant les différentes positions des ennemies
 
 wall.volume     = 0.05;
 footstep.volume = 0.05;
@@ -65,11 +71,29 @@ document.getElementById('start').addEventListener("click", function(){          
 
         clearInterval(inter);
         window.removeEventListener("keydown", _listener);
+        document.getElementById('overlay').style.display="block";
+        document.getElementById('start').style.display="block";
     
     },true);
 
+    document.getElementById('reset').addEventListener("click", function(){
+
+        clearInterval(inter);
+        window.removeEventListener("keydown", _listener);
+        document.getElementById('overlay').style.display="block";
+        document.getElementById('start').style.display="block";
+    
+    },true);
+
+    document.getElementById('reset').addEventListener("click",init);
+
     
 });
+
+
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------- Methodes ----------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 function init(){                                                                            // Initialise Le plateau de jeu Ainsi que la position des différentes entitées
     j1 = document.getElementById('player');
@@ -80,6 +104,7 @@ function init(){                                                                
     for(let i = 0; i < 6; i++ )
     {     
         ennemies[i] = document.getElementById('e'+(i+1));
+        ePos['div'][i] = document.getElementById('e'+(i+1));
 
         ennemies[i].style.backgroundImage="url('./assets/img/slime.gif')";
 
