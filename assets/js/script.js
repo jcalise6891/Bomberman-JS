@@ -1,15 +1,13 @@
 let j1          = null;
 let b           = null;
 let ennemies    = [];
-// let inter       = setInterval(eMove(),200);
-
 let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
 
 wall.volume     = 0.05;
 footstep.volume = 0.05;
 
-window.onload=init();
+window.onload=init;
 
 window.addEventListener("keydown",function(Event){
 
@@ -34,27 +32,7 @@ window.addEventListener("keydown",function(Event){
 
 });
 
-document.getElementById('start').addEventListener("click", setInterval(function(){
 
-    let mv = rand(1,5,1);
-    let e = rand(0,7,1);
-
-    switch (mv){
-        case 1:
-            moveUp(ennemies[e]);
-            break;
-        case 2:
-            moveDown(ennemies[e]);
-            break;
-        case 3:
-            moveLeft(ennemies[e]);
-            break;
-        case 4:
-            moveRight(ennemies[e]);
-            break;
-    }
-    
-},200));
 
 function init(){
     j1 = document.getElementById('player');
@@ -150,5 +128,36 @@ function rand(min, max, step) {
     rand += min;
     return rand;
 }
+
+document.getElementById('start').addEventListener("click", function(){
+
+    this.style.display="none";
+
+    let inter = setInterval(() => {
+
+        let mv = rand(1,5,1);
+        let e = rand(0,6,1);
+
+        switch (mv){
+            case 1:
+                moveUp(ennemies[e]);
+                break;
+            case 2:
+                moveDown(ennemies[e]);
+                break;
+            case 3:
+                moveLeft(ennemies[e]);
+                break;
+            case 4:
+                moveRight(ennemies[e]);
+                break;
+        }
+            
+    }, 200);
+
+    }
+);
+
+
 
 
