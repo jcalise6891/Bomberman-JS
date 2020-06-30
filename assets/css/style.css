@@ -35,6 +35,14 @@
     width:50px;
 }
 
+.board #overlay{
+    background-color: rgba(255, 255, 255, 0.774);
+    position:absolute;
+    height:800px;
+    width:800px;
+    z-index: 2;
+}
+
 .board #start{
     color: white;
     font-family: "myPixel",sans-serif;
@@ -52,6 +60,7 @@
     -moz-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
     -o-transform: translate(-50%, -50%);
+    z-index: 3;
 }
 
 .board #start:hover{
