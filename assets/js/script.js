@@ -1,5 +1,6 @@
 let j1          = null;                                                                     // Div Joueur
-let ennemies    = [];                                                                       // Tableau contenant les différentes div ennemies
+let ennemies    = [];
+let inter       = null;                                                                       // Tableau contenant les différentes div ennemies
 let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
 
@@ -8,32 +9,33 @@ footstep.volume = 0.05;
 
 window.onload=init;
 
-window.addEventListener("keydown",function(Event){                                          // Détection des touches du clavier pour les différents mouvements du joueur
-
-    let key_code = Event.keyCode;
-
-    console.log('touche '+ key_code);
-
-    switch(key_code){
-        case 37: // Gauche
-            moveLeft(j1);
-            break;
-        case 38: // Haut
-            moveUp(j1);
-            break;
-        case 39: // Droit
-            moveRight(j1);
-            break;
-        case 40: // Bas
-            moveDown(j1);
-            break;
-    }
-});
-
 document.getElementById('start').addEventListener("click", function(){                      // Déplacement Monstre
 
     this.style.display="none";
     document.getElementById('overlay').style.display="none";
+
+    window.addEventListener("keydown",function(Event){                                          // Détection des touches du clavier pour les différents mouvements du joueur
+
+        let key_code = Event.keyCode;
+
+        console.log('touche '+ key_code);
+
+        switch(key_code){
+            case 37: // Gauche
+                moveLeft(j1);
+                break;
+            case 38: // Haut
+                moveUp(j1);
+                break;
+            case 39: // Droit
+                moveRight(j1);
+                break;
+            case 40: // Bas
+                moveDown(j1);
+                break;
+        }
+    });
+
 
     let inter = setInterval(() => {
 
@@ -57,8 +59,15 @@ document.getElementById('start').addEventListener("click", function(){          
             
     }, 200);
 
-    }
-);
+    document.getElementById('stop').addEventListener("click", function(){
+
+        clearInterval(inter);
+        window.removeEventListener("keydown", function);
+    
+    },true);
+
+    
+});
 
 function init(){                                                                            // Initialise Le plateau de jeu Ainsi que la position des différentes entitées
     j1 = document.getElementById('player');

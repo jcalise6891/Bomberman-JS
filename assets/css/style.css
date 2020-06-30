@@ -80,3 +80,38 @@ p{
     color:white;
     font-family: "myPixel",sans-serif;
 }
+
+.game .stats{
+    display:flex;
+    flex-flow:column wrap;
+    height:800px;
+
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+}
+
+.game #stop{
+    color: white;
+    font-family: "myPixel",sans-serif;
+    border: 0.05rem solid black;
+    background-color:#494D5F;
+    box-shadow: 5px 10px 8px black;
+    text-decoration: none;
+    padding:1rem 2rem;
+    cursor:pointer;
+    z-index: 3;
+}
+
+.game #stop:hover{
+    background-color: white;
+    color:black;
+}
+
+.game #stop:focus{
+    outline:0;
+}
+
+.game #stop:active{
+    color:blue;
+}
