@@ -1,6 +1,7 @@
 let j1          = null;
 let b           = null;
 let ennemies    = [];
+// let inter       = setInterval(eMove(),200);
 
 let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
@@ -8,7 +9,7 @@ let wall        = new Audio('./assets/sound/sfx_wall.wav');
 wall.volume     = 0.05;
 footstep.volume = 0.05;
 
-window.onload=init;
+window.onload=init();
 
 window.addEventListener("keydown",function(Event){
 
@@ -18,20 +19,42 @@ window.addEventListener("keydown",function(Event){
 
     switch(key_code){
         case 37: // Gauche
-            moveLeft();
+            moveLeft(j1);
             break;
         case 38: // Haut
-            moveUp();
+            moveUp(j1);
             break;
         case 39: // Droit
-            moveRight();
+            moveRight(j1);
             break;
         case 40: // Bas
-            moveDown();
+            moveDown(j1);
             break;
     }
 
 });
+
+document.getElementById('start').addEventListener("click", setInterval(function(){
+
+    let mv = rand(1,5,1);
+    let e = rand(0,7,1);
+
+    switch (mv){
+        case 1:
+            moveUp(ennemies[e]);
+            break;
+        case 2:
+            moveDown(ennemies[e]);
+            break;
+        case 3:
+            moveLeft(ennemies[e]);
+            break;
+        case 4:
+            moveRight(ennemies[e]);
+            break;
+    }
+    
+},200));
 
 function init(){
     j1 = document.getElementById('player');
@@ -55,46 +78,54 @@ function init(){
 
 }
 
-function moveLeft(){
-    if(parseInt(j1.style.left) > 0){
-    footstep.play();
-    j1.style.left =parseInt(j1.style.left)-50+'px';
-    j1.style.backgroundImage = "url('./assets/img/bomberman_left.png')";
+function moveLeft(div){
+    if(parseInt(div.style.left) > 0){
+        div.style.left =parseInt(div.style.left)-50+'px';
+        if (div == j1){
+            j1.style.backgroundImage = "url('./assets/img/bomberman_left.png')";
+            footstep.play();
+        }    
     }
-    else{
+    else if(div == j1){
         wall.play();
     }
 }
 
-function moveUp(){
-    if(parseInt(j1.style.top) > 0){
-        footstep.play();
-        j1.style.top =parseInt(j1.style.top)-50+'px';
-        j1.style.backgroundImage = "url('./assets/img/bomberman_top.png')";
+function moveUp(div){
+    if(parseInt(div.style.top) > 0){
+        div.style.top =parseInt(div.style.top)-50+'px';
+        if (div == j1){
+            j1.style.backgroundImage = "url('./assets/img/bomberman_top.png')";
+            footstep.play();
+        }    
     }
-    else{
+    else if(div == j1){
         wall.play();
     }
 }
 
-function moveRight(){
-    if(parseInt(j1.style.left) < 750){
-        footstep.play();    
-        j1.style.left =parseInt(j1.style.left)+50+'px';
-        j1.style.backgroundImage = "url('./assets/img/bomberman_right.png')";
+function moveRight(div){
+    if(parseInt(div.style.left) < 750){
+        div.style.left =parseInt(div.style.left)+50+'px';
+        if (div == j1){
+            j1.style.backgroundImage = "url('./assets/img/bomberman_right.png')";
+            footstep.play();
+        }    
     }
-    else{
+    else if(div == j1){
         wall.play();
     }
 }
 
-function moveDown(){
-    if(parseInt(j1.style.top) < 750){
-        footstep.play();
-     j1.style.top =parseInt(j1.style.top)+50+'px';
-     j1.style.backgroundImage = "url('./assets/img/bomberman_down.png')";
+function moveDown(div){
+    if(parseInt(div.style.top) < 750){
+        div.style.top =parseInt(div.style.top)+50+'px';
+        if (div == j1){
+            j1.style.backgroundImage = "url('./assets/img/bomberman_down.png')";
+            footstep.play();
+        }    
     }
-    else{
+    else if(div == j1){
         wall.play();
     }
 }

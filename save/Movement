@@ -1,0 +1,43 @@
+function moveLeft(){
+    if(parseInt(j1.style.left) > 0){
+    footstep.play();
+    j1.style.left =parseInt(j1.style.left)-50+'px';
+    j1.style.backgroundImage = "url('./assets/img/bomberman_left.png')";
+    }
+    else{
+        wall.play();
+    }
+}
+
+function moveUp(){
+    if(parseInt(j1.style.top) > 0){
+        footstep.play();
+        j1.style.top =parseInt(j1.style.top)-50+'px';
+        j1.style.backgroundImage = "url('./assets/img/bomberman_top.png')";
+    }
+    else{
+        wall.play();
+    }
+}
+
+function moveRight(){
+    if(parseInt(j1.style.left) < 750){
+        footstep.play();    
+        j1.style.left =parseInt(j1.style.left)+50+'px';
+        j1.style.backgroundImage = "url('./assets/img/bomberman_right.png')";
+    }
+    else{
+        wall.play();
+    }
+}
+
+function moveDown(){
+    if(parseInt(j1.style.top) < 750){
+        footstep.play();
+     j1.style.top =parseInt(j1.style.top)+50+'px';
+     j1.style.backgroundImage = "url('./assets/img/bomberman_down.png')";
+    }
+    else{
+        wall.play();
+    }
+}
