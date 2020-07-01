@@ -1,6 +1,9 @@
 let j1          = null;                                                                     // Div Joueur
-let ennemies    = [];
-let inter       = null;                                                                     // Tableau contenant les différentes div ennemies
+let ennemies    = [];                                                                       // Tableau contenant les différentes div ennemies
+let horde       = [];
+
+let inter       = null;    
+
 let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
 
@@ -103,11 +106,18 @@ function init(){                                                                
     j1.style.backgroundImage="url('./assets/img/bomberman_idle.png')";
 
     for(let i = 0; i < 6; i++ )
-    {     
-        ennemies[i] = document.getElementById('e'+(i+1));
-        ePos['div'][i] = document.getElementById('e'+(i+1));
+    { 
+        horde[i] = Object.create(slime);
+        horde[i].div = document.getElementById('e'+(i+1));
+        horde[i].div.style.backgroundImage="url('./assets/img/slime.gif')";
+        horde[i].div.style.left="0px";
+        horde[i].div.style.top="0px";
 
-        ennemies[i].style.backgroundImage="url('./assets/img/slime.gif')";
+        
+        ennemies[i] = document.getElementById('e'+(i+1));
+        
+
+      //  ennemies[i].style.backgroundImage="url('./assets/img/slime.gif')";
 
         ennemies[i].style.left="0px";
         ennemies[i].style.top="0px";        
