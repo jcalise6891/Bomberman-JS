@@ -3,12 +3,13 @@ let ennemies    = [];
 let inter       = null;                                                                     // Tableau contenant les différentes div ennemies
 let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
-let lp          = 0;                                                                        // Nb de Point de vie
 
-let ePos        = new Array();
-    ePos['div']     = new Array();
-    ePos['x']       = new Array()
-    ePos['y']       = new Array();                                                             // Tableau contenant les différentes positions des ennemies
+let slime = {
+    x:  0,
+    y:  0,
+    lp: 1,
+    div: null
+}
 
 wall.volume     = 0.05;
 footstep.volume = 0.05;
