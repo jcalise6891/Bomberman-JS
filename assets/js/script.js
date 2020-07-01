@@ -1,4 +1,7 @@
-// let j1          = null;                                                            // Div Joueur
+import Slime from "./Slime.js";
+
+
+let j1          = null;                                                            // Div Joueur
 let ennemies    = [];                                                              // Tableau contenant les différentes div ennemies
 let horde       = [];
 
@@ -7,40 +10,36 @@ let inter       = null;
 let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
 
-let slime = {
-    x:      0,
-    y:      0,
-    lp:     0,
-    div: null,
+// let slime = {
+//     x:      0,
+//     y:      0,
+//     lp:     0,
+//     div: null,
 
-    left: function(left){
-        this.div.style.left = parseInt(this.div.style.left)+left+'px';
-    },
-    top:function(top){
-        this.div.style.top = parseInt(this.div.style.top)+top+'px';
-    }
+//     left: function(left){
+//         this.div.style.left = parseInt(this.div.style.left)+left+'px';
+//     },
+//     top:function(top){
+//         this.div.style.top = parseInt(this.div.style.top)+top+'px';
+//     }
 
-}
+// }
 
-let j1 = {
+// let j1 = {
 
-    x:  0,
-    y:  0,
-    lp: 0,
-    div: document.getElementById('player'),
+//     x:  0,
+//     y:  0,
+//     lp: 0,
+//     div: document.getElementById('player'),
 
-    left: function(left){
-        this.div.style.left = parseInt(this.div.style.left)+left+'px';
-    },
-    top:function(top){
-        this.div.style.top = parseInt(this.div.style.top)+top+'px';
-    }
+//     left: function(left){
+//         this.div.style.left = parseInt(this.div.style.left)+left+'px';
+//     },
+//     top:function(top){
+//         this.div.style.top = parseInt(this.div.style.top)+top+'px';
+//     }
 
-}
-
-j1.prototype.bombe = function(){
-    console.log('bombe');
-}
+// }
 
 wall.volume     = 0.05;
 footstep.volume = 0.05;
@@ -136,18 +135,22 @@ function init(){                                                       // Initia
 
     for(let i = 0; i < 6; i++ )
     { 
-        horde[i]                            = Object.create(slime);
-        horde[i].div                        = document.getElementById('e'+(i+1));
 
-        horde[i].div.style.backgroundImage  ="url('./assets/img/slime.gif')";
+        horde[i] = new Slime(document.getElementById('e'+(i+1)));
+        console.log(horde[i]);
 
-        horde[i].div.style.left             ="0px";
-        horde[i].div.style.top              ="0px";
+        // horde[i]                            = Object.create(slime);
+        // horde[i].div                        = document.getElementById('e'+(i+1));
 
-        horde[i].left(rand(0,800,50));
-        horde[i].top(rand(0,800,50));
+        // horde[i].div.style.backgroundImage  ="url('./assets/img/slime.gif')";
 
-        horde[i].lp = 1;
+        // horde[i].div.style.left             ="0px";
+        // horde[i].div.style.top              ="0px";
+
+        // horde[i].left(rand(0,800,50));
+        // horde[i].top(rand(0,800,50));
+
+        // horde[i].lp = 1;
     }
 }
 //========================================================================================= Methode de mouvement des entitées =======================
