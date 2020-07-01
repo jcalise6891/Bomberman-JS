@@ -1,5 +1,5 @@
-let j1          = null;                                                                     // Div Joueur
-let ennemies    = [];                                                                       // Tableau contenant les différentes div ennemies
+// let j1          = null;                                                            // Div Joueur
+let ennemies    = [];                                                              // Tableau contenant les différentes div ennemies
 let horde       = [];
 
 let inter       = null;    
@@ -8,10 +8,38 @@ let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
 
 let slime = {
+    x:      0,
+    y:      0,
+    lp:     0,
+    div: null,
+
+    left: function(left){
+        this.div.style.left = parseInt(this.div.style.left)+left+'px';
+    },
+    top:function(top){
+        this.div.style.top = parseInt(this.div.style.top)+top+'px';
+    }
+
+}
+
+let j1 = {
+
     x:  0,
     y:  0,
-    lp: 1,
-    div: null
+    lp: 0,
+    div: document.getElementById('player'),
+
+    left: function(left){
+        this.div.style.left = parseInt(this.div.style.left)+left+'px';
+    },
+    top:function(top){
+        this.div.style.top = parseInt(this.div.style.top)+top+'px';
+    }
+
+}
+
+j1.prototype.bombe = function(){
+    console.log('bombe');
 }
 
 wall.volume     = 0.05;
@@ -19,12 +47,12 @@ footstep.volume = 0.05;
 
 window.onload=init;
 
-document.getElementById('start').addEventListener("click", function(){                      // Déplacement Monstre
+document.getElementById('start').addEventListener("click", function(){            // Déplacement Joueur
 
     this.style.display="none";
     document.getElementById('overlay').style.display="none";
 
-    let _listener = function(Event){                                                        // Ta mère le concombre, cordialement, saleté d'AddEventListener... 
+    let _listener = function(Event){                                              // Ta mère le concombre, cordialement, saleté d'AddEventListener... 
 
         let key_code = Event.keyCode;
     
@@ -47,7 +75,7 @@ document.getElementById('start').addEventListener("click", function(){          
     
     }
 
-    window.addEventListener("keydown", _listener)                                         // Détection des touches du clavier pour les différents mouvements du joueur
+    window.addEventListener("keydown", _listener)                                 // Déplacement Monstre
 
     let inter = setInterval(() => {
 
@@ -56,16 +84,16 @@ document.getElementById('start').addEventListener("click", function(){          
 
         switch (mv){
             case 1:
-                moveUp(ennemies[e]);
+                moveUp(horde[e].div);
                 break;
             case 2:
-                moveDown(ennemies[e]);
+                moveDown(horde[e].div);
                 break;
             case 3:
-                moveLeft(ennemies[e]);
+                moveLeft(horde[e].div);
                 break;
             case 4:
-                moveRight(ennemies[e]);
+                moveRight(horde[e].div);
                 break;
         }
             
@@ -95,11 +123,12 @@ document.getElementById('start').addEventListener("click", function(){          
 });
 
 
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//----------------------------------------------------------- Methodes ----------------------------------------------------------------------------------------------------
-//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------------------- Methodes ------------------------------------------------------------------------------
+//---------------------------------------------------------------------------------------------------------------------------------------------------
 
-function init(){                                                                            // Initialise Le plateau de jeu Ainsi que la position des différentes entitées
+function init(){                                                       // Initialise Le plateau de jeu Ainsi que la position des différentes entitées
+
     j1 = document.getElementById('player');
     j1.style.left="0px";
     j1.style.top="0px";
@@ -107,26 +136,21 @@ function init(){                                                                
 
     for(let i = 0; i < 6; i++ )
     { 
-        horde[i] = Object.create(slime);
-        horde[i].div = document.getElementById('e'+(i+1));
-        horde[i].div.style.backgroundImage="url('./assets/img/slime.gif')";
-        horde[i].div.style.left="0px";
-        horde[i].div.style.top="0px";
+        horde[i]                            = Object.create(slime);
+        horde[i].div                        = document.getElementById('e'+(i+1));
 
-        
-        ennemies[i] = document.getElementById('e'+(i+1));
-        
+        horde[i].div.style.backgroundImage  ="url('./assets/img/slime.gif')";
 
-      //  ennemies[i].style.backgroundImage="url('./assets/img/slime.gif')";
+        horde[i].div.style.left             ="0px";
+        horde[i].div.style.top              ="0px";
 
-        ennemies[i].style.left="0px";
-        ennemies[i].style.top="0px";        
- 
-        ennemies[i].style.left =parseInt(ennemies[i].style.left)+rand(0,800,50)+'px';
-        ennemies[i].style.top =parseInt(ennemies[i].style.top)+rand(0,800,50)+'px';  
+        horde[i].left(rand(0,800,50));
+        horde[i].top(rand(0,800,50));
+
+        horde[i].lp = 1;
     }
 }
-//========================================================================================= Methode de mouvement des entitées ========================
+//========================================================================================= Methode de mouvement des entitées =======================
 function moveLeft(div){
     if(parseInt(div.style.left) > 0){
         div.style.left =parseInt(div.style.left)-50+'px';
@@ -179,7 +203,7 @@ function moveDown(div){
     }
 }
 
-//================================================================================================================================================
+//===================================================================================================================================================
 
 function rand(min, max, step) {                                 // Méthode qui retourne un chiffre aléatoire selon le min, le max et la pas
     let delta,
