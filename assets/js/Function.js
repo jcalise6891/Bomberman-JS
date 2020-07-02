@@ -24,8 +24,10 @@ export function rand(min, max, step){
 }
 export function left(entity,x){
     entity.style.left = parseInt(entity.style.left)+x+'px';
+    return x;
 }
 
  export function top(entity,y){
     entity.style.top = parseInt(entity.style.top)+y+'px';
+    return y;
 }

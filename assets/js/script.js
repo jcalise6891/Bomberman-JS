@@ -25,6 +25,10 @@ document.getElementById('start').addEventListener("click", function(){          
         console.log('touche '+ key_code);
     
         switch(key_code){
+
+            case 32 : // Espace - Bombe
+                j1.bombe();
+                break;            
             case 37: // Gauche
                 moveLeft(j1.div);
                 break;
