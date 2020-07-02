@@ -1,9 +1,11 @@
 import  Slime   from   "./Slime.js";
 import  Player  from   "./Player.js"; 
 import  {rand}   from  "./Function.js";   
-
-let j1          = null;                                                           // Tableau contenant les différentes div ennemies
-let horde       = [];  
+import Bombe from "./Bombe.js";
+                                                        
+let horde       = [];                                                            // Tableau contenant les différentes div ennemies  
+let j1          = null;
+let i           = null;
 
 let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
@@ -27,7 +29,19 @@ document.getElementById('start').addEventListener("click", function(){          
         switch(key_code){
 
             case 32 : // Espace - Bombe
-                j1.bombe();
+            
+                j1[i] = new Bombe(j1.x, j1.y,i);
+                j1[i].pose();
+
+                let Fexp = function(j1,i){
+                    j1[i].explosion();
+                }
+
+
+                console.log('A item :'+j1[i]+'Incrément de bombe : '+i);
+                setTimeout(Fexp, 3000,j1,i);
+               
+                
                 break;            
             case 37: // Gauche
                 moveLeft(j1.div);
@@ -98,7 +112,8 @@ document.getElementById('start').addEventListener("click", function(){          
 
 function init(){                                                       // Initialise Le plateau de jeu Ainsi que la position des différentes entitées
 
-    j1 = new Player(document.getElementById('player'));
+     j1 = new Player(document.getElementById('player'));
+     i = 0;
 
     for(let i = 0; i < 6; i++ )
     { 
