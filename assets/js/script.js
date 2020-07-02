@@ -29,18 +29,22 @@ document.getElementById('start').addEventListener("click", function(){          
         switch(key_code){
 
             case 32 : // Espace - Bombe
-            
-                j1[i] = new Bombe(j1.x, j1.y,i);
-                j1[i].pose();
+                
+                j1.bombe[i] = new Bombe(j1.x, j1.y,i);
+                j1.bombe[i].pose();
+                console.log('A item :'+j1[i]+'Incrément de bombe : '+i);
+                console.log(j1);
+                
 
                 let Fexp = function(j1,i){
-                    j1[i].explosion();
-                }
-
-
-                console.log('A item :'+j1[i]+'Incrément de bombe : '+i);
+                    j1.bombe[i].explosion();
+                }                
+                
                 setTimeout(Fexp, 3000,j1,i);
-               
+                    
+                
+                
+                i++;
                 
                 break;            
             case 37: // Gauche
@@ -126,6 +130,7 @@ function moveLeft(div){
     if(parseInt(div.style.left) > 0){
         div.style.left =parseInt(div.style.left)-50+'px';
         if (div == j1.div){
+            j1.x = parseInt(j1.div.style.left);
             j1.div.style.backgroundImage = "url('./assets/img/bomberman_left.png')";
             footstep.play();
         }    
@@ -139,6 +144,7 @@ function moveUp(div){
     if(parseInt(div.style.top) > 0){
         div.style.top =parseInt(div.style.top)-50+'px';
         if (div == j1.div){
+            j1.y = parseInt(j1.div.style.top);
             j1.div.style.backgroundImage = "url('./assets/img/bomberman_top.png')";
             footstep.play();
         }    
@@ -152,6 +158,7 @@ function moveRight(div){
     if(parseInt(div.style.left) < 750){
         div.style.left =parseInt(div.style.left)+50+'px';
         if (div == j1.div){
+            j1.x = parseInt(j1.div.style.left);
             j1.div.style.backgroundImage = "url('./assets/img/bomberman_right.png')";
             footstep.play();
         }    
@@ -165,6 +172,7 @@ function moveDown(div){
     if(parseInt(div.style.top) < 750){
         div.style.top =parseInt(div.style.top)+50+'px';
         if (div == j1.div){
+            j1.y = parseInt(j1.div.style.top);
             j1.div.style.backgroundImage = "url('./assets/img/bomberman_down.png')";
             footstep.play();
         }    

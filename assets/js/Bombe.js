@@ -36,7 +36,8 @@ export default class Bombe  {
         setTimeout(() => {
             b.style.display="none";
             b.remove();
-        }, 600);
+        }, 800);
+        
         
     }
 

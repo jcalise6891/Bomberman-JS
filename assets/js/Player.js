@@ -3,6 +3,7 @@ import {rand,left,top} from "./Function.js";
 export default class Player{
    
     constructor(div){
+        this.bombe = [];
         this.div = div;
         this.div.style.left = 0;
         this.div.style.top = 0;
