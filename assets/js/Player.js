@@ -1,15 +1,13 @@
 import {rand,left,top} from "./Function.js";
 
-export default class Slime{
-
+export default class Player{
+   
     constructor(div){
         this.div = div;
         this.div.style.left = 0;
         this.div.style.top = 0;
-        left    (div,rand(0,800,50));
-        top     (div,rand(0,800,50));
+        this.div.style.backgroundImage="url('./assets/img/bomberman_idle.png')";
         this.lp = 1;
-        this.div.style.backgroundImage = "url('./assets/img/slime.gif')";
     }
 
 }
