@@ -1,9 +1,11 @@
 export default class Bombe  {
 
-    constructor(x,y,i){
+    constructor(x,y){
+        this.active = true;
+        this.div
         this.x = x;
         this.y = y; 
-        this.i = i;
+      //  this.i = i;
     }
 
     pose(){
@@ -11,7 +13,6 @@ export default class Bombe  {
         let b = document.createElement("div");
         
         b.classList.add("bombe");
-        b.setAttribute("id", "b"+this.i);
 
         b.style.position="absolute";
         b.style.height="50px";
@@ -27,16 +28,19 @@ export default class Bombe  {
         console.log(b);
 
         console.log('Bombe Posée en : '+ this.x +','+this.y);
+
+        this.div = b;
        
     }
 
     explosion(){
-        let b = document.getElementById('b'+this.i);
+        let b = this.div;
         b.style.backgroundImage="url('./assets/img/explosion.gif')";
         setTimeout(() => {
             b.style.display="none";
             b.remove();
         }, 800);
+        this.active = false;
         
         
     }

@@ -5,7 +5,7 @@ import Bombe from "./Bombe.js";
                                                         
 let horde       = [];                                                            // Tableau contenant les différentes div ennemies  
 let j1          = null;
-let i           = null;
+let i           = 0;
 
 let footstep    = new Audio("./assets/sound/sfx_footstep.wav");
 let wall        = new Audio('./assets/sound/sfx_wall.wav');
@@ -30,20 +30,37 @@ document.getElementById('start').addEventListener("click", function(){          
 
             case 32 : // Espace - Bombe
                 
-                j1.bombe[i] = new Bombe(j1.x, j1.y,i);
-                j1.bombe[i].pose();
-                console.log('A item :'+j1[i]+'Incrément de bombe : '+i);
-                console.log(j1);
+                let b = new Bombe(j1.x, j1.y);
+                b.pose();
+
+                j1.bombe[i] = b;
+               
+                console.log(j1.bombe);
+
+                               
+                let Fexp = function(b){
+                    b.explosion();
+                }
+                
+                setTimeout(Fexp, 3000,b);
+                
                 
 
-                let Fexp = function(j1,i){
-                    j1.bombe[i].explosion();
-                }                
-                
-                setTimeout(Fexp, 3000,j1,i);
-                    
-                
-                
+                i = j1.bombe.forEach(Element =>
+                    function(Element){
+                      
+                        if(Element.active === false){
+                            delete j1.bombe[i];
+                            if(i > 0){
+                                i = i--;
+                            }   
+                            
+                        }
+                        return i;
+                    },i);
+
+                console.log("Incrément i : "+i);
+
                 i++;
                 
                 break;            
