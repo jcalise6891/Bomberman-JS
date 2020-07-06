@@ -24,45 +24,48 @@ document.getElementById('start').addEventListener("click", function(){          
 
         let key_code = Event.keyCode;
     
-        console.log('touche '+ key_code);
+        // console.log('touche '+ key_code);
     
         switch(key_code){
 
             case 32 : // Espace - Bombe
                 
-                let b = new Bombe(j1.x, j1.y);
-                b.pose();
+                let b;
 
-                j1.bombe[i] = b;
-               
-                console.log(j1.bombe);
-
-                               
                 let Fexp = function(b){
-                    b.explosion();
+                    b.explosion(horde,j1);
+                    // j1.bombe.pop();
+                }
+                    
+                // console.log(j1.bombe);
+                
+
+                if(j1.bombe.length != 0 && j1.bombe.length < 4)
+                {
+                    console.log(j1.bombe);
+                    j1.bombe.forEach(element => {
+
+                        if(element.x != j1.x || element.y != j1.y)
+                        {
+                            b = new Bombe(j1.x, j1.y);
+                            b.pose();                                
+                            j1.bombe.push(b);
+                            
+                            // console.log(element);
+                            setTimeout(Fexp, 2000,b); 
+                        }             
+                    });
+                }            
+                else if (j1.bombe.length < 4){
+                    console.log(j1.bombe);
+                    b = new Bombe(j1.x, j1.y);
+                    b.pose();  
+                    // console.log(b);  
+                    j1.bombe.push(b);
+                    setTimeout(Fexp, 2000,b); 
                 }
                 
-                setTimeout(Fexp, 3000,b);
-                
-                
 
-                i = j1.bombe.forEach(Element =>
-                    function(Element){
-                      
-                        if(Element.active === false){
-                            delete j1.bombe[i];
-                            if(i > 0){
-                                i = i--;
-                            }   
-                            
-                        }
-                        return i;
-                    },i);
-
-                console.log("Incrément i : "+i);
-
-                i++;
-                
                 break;            
             case 37: // Gauche
                 moveLeft(j1.div);
@@ -82,27 +85,27 @@ document.getElementById('start').addEventListener("click", function(){          
 
     window.addEventListener("keydown", _listener)                                 // Déplacement Monstre
 
-    let inter = setInterval(() => {
+    // let inter = setInterval(() => {
 
-        let mv = rand(1,6,1);
-        let e = rand(0,6,1);
+    //     let mv = rand(1,6,1);
+    //     let e = rand(0,6,1);
 
-        switch (mv){
-            case 1:
-                moveUp(horde[e].div);
-                break;
-            case 2:
-                moveDown(horde[e].div);
-                break;
-            case 3:
-                moveLeft(horde[e].div);
-                break;
-            case 4:
-                moveRight(horde[e].div);
-                break;
-        }
+    //     switch (mv){
+    //         case 1:
+    //             moveUp(horde[e].div);
+    //             break;
+    //         case 2:
+    //             moveDown(horde[e].div);
+    //             break;
+    //         case 3:
+    //             moveLeft(horde[e].div);
+    //             break;
+    //         case 4:
+    //             moveRight(horde[e].div);
+    //             break;
+    //     }
             
-    }, 200);
+    // }, 200);
 
     document.getElementById('stop').addEventListener("click", function(){
 
@@ -136,10 +139,10 @@ function init(){                                                       // Initia
      j1 = new Player(document.getElementById('player'));
      i = 0;
 
-    for(let i = 0; i < 6; i++ )
+    for(let i = 0; i < 1 ; i++ )
     { 
         horde[i] = new Slime(document.getElementById('e'+(i+1)));
-        console.log(horde[i]);
+        // console.log(horde[i]);
     }
 }
 //========================================================================================= Methode de mouvement des entitées =======================
