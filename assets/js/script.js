@@ -40,6 +40,7 @@ document.getElementById('start').addEventListener("click", function(){          
                 // console.log(j1.bombe);
                 
 
+<<<<<<< HEAD
                 // if(j1.bombe.length != 0 && j1.bombe.length < 10)
                 // {
                     
@@ -67,6 +68,32 @@ document.getElementById('start').addEventListener("click", function(){          
                     console.log(j1.bombe);
                     setTimeout(Fexp, 2000,b); 
                 // }
+=======
+                if(j1.bombe.length != 0 && j1.bombe.length < 4)
+                {
+                    console.log(j1.bombe);
+                    j1.bombe.forEach(element => {
+
+                        if(element.x != j1.x || element.y != j1.y)
+                        {
+                            b = new Bombe(j1.x, j1.y);
+                            b.pose();                                
+                            j1.bombe.push(b);
+                            
+                            // console.log(element);
+                            setTimeout(Fexp, 2000,b); 
+                        }             
+                    });
+                }            
+                else if (j1.bombe.length < 4){
+                    console.log(j1.bombe);
+                    b = new Bombe(j1.x, j1.y);
+                    b.pose();  
+                    // console.log(b);  
+                    j1.bombe.push(b);
+                    setTimeout(Fexp, 2000,b); 
+                }
+>>>>>>> df249fa4c428a8cc14a05b30d4830a590bde0107
                 
 
                 break;            
@@ -88,27 +115,27 @@ document.getElementById('start').addEventListener("click", function(){          
 
     window.addEventListener("keydown", _listener)                                 // Déplacement Monstre
 
-    let inter = setInterval(() => {
+    // let inter = setInterval(() => {
 
-        let mv = rand(1,6,1);
-        let e = rand(0,6,1);
+    //     let mv = rand(1,6,1);
+    //     let e = rand(0,6,1);
 
-        switch (mv){
-            case 1:
-                moveUp(horde[e].div);
-                break;
-            case 2:
-                moveDown(horde[e].div);
-                break;
-            case 3:
-                moveLeft(horde[e].div);
-                break;
-            case 4:
-                moveRight(horde[e].div);
-                break;
-        }
+    //     switch (mv){
+    //         case 1:
+    //             moveUp(horde[e].div);
+    //             break;
+    //         case 2:
+    //             moveDown(horde[e].div);
+    //             break;
+    //         case 3:
+    //             moveLeft(horde[e].div);
+    //             break;
+    //         case 4:
+    //             moveRight(horde[e].div);
+    //             break;
+    //     }
             
-    }, 200);
+    // }, 200);
 
     document.getElementById('stop').addEventListener("click", function(){
 

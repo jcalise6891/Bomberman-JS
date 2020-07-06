@@ -43,12 +43,17 @@ export default class Bombe  {
         b.style.width="150px";
         b.style.transform="translate(-50px,-50px)";
         b.style.backgroundImage="url('./assets/img/explosion.gif')";
+<<<<<<< HEAD
         
         // setTimeout(() => {
+=======
+        setTimeout(() => {
+>>>>>>> df249fa4c428a8cc14a05b30d4830a590bde0107
             // console.log(b);
 
             h.forEach(element=>{
                 if(( element.x >=  (this.x-50) && element.x <= (this.x+50)  ) && ( element.y >=  (this.y-50) && element.y <= (this.y+50))){
+<<<<<<< HEAD
                     console.log('le monstre '+element.div.id+' qui avait '+element.lp+' point de vie à été touché');
                    if(element.lp > 0){
                         element.lp--;
@@ -59,14 +64,26 @@ export default class Bombe  {
                    }                 
                     console.log(element.lp)
                     
+=======
+                    // console.log('le monstre '+element.div.id+' qui avait '+element.lp+' point de vie à été touché');
+                    element.lp--;
+                    console.log(element.lp)
+                    console.log(t);
+>>>>>>> df249fa4c428a8cc14a05b30d4830a590bde0107
                     console.log(this);
                 }
             });
 
             b.style.display="none";
             b.remove();
+<<<<<<< HEAD
             p.bombe.shift();
         // }, 800);       
+=======
+            p.bombe.pop();
+            // tb[tb.length-1].remove();
+        }, 800);       
+>>>>>>> df249fa4c428a8cc14a05b30d4830a590bde0107
     }
 
 }
