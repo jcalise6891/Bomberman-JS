@@ -31,71 +31,39 @@ document.getElementById('start').addEventListener("click", function(){          
             case 32 : // Espace - Bombe
                 
                 let b;
+                let p = Promise.resolve(b);
+                let t = false;
 
                 let Fexp = function(b){
                     b.explosion(horde,j1);
-                    // j1.bombe.pop();
                 }
-                    
-                // console.log(j1.bombe);
+
+                b = new Bombe(j1.x, j1.y);   
                 
-
-<<<<<<< HEAD
-                // if(j1.bombe.length != 0 && j1.bombe.length < 10)
-                // {
-                    
-                //     j1.bombe.forEach(element => {
-
-                //         // if(element.x != j1.x || element.y != j1.y)
-                //         // {
-                //             b = new Bombe(j1.x, j1.y);
-                //             console.log(j1.bombe);
-                //             b.pose();                                
-                //             j1.bombe.push(b);
-                            
-                //             // console.log(element);
-                //             setTimeout(Fexp, 2000,b); 
-                // // //         }             
-                //     });
-                // // }            
-                // else if (j1.bombe.length < 10){
-                    
-                    b = new Bombe(j1.x, j1.y);
-                    
+                if(j1.bombe.length === 0){                                    
                     b.pose();  
                     // console.log(b);  
                     j1.bombe.push(b);
                     console.log(j1.bombe);
                     setTimeout(Fexp, 2000,b); 
-                // }
-=======
-                if(j1.bombe.length != 0 && j1.bombe.length < 4)
-                {
-                    console.log(j1.bombe);
-                    j1.bombe.forEach(element => {
-
-                        if(element.x != j1.x || element.y != j1.y)
-                        {
-                            b = new Bombe(j1.x, j1.y);
-                            b.pose();                                
-                            j1.bombe.push(b);
-                            
-                            // console.log(element);
-                            setTimeout(Fexp, 2000,b); 
-                        }             
-                    });
-                }            
-                else if (j1.bombe.length < 4){
-                    console.log(j1.bombe);
-                    b = new Bombe(j1.x, j1.y);
-                    b.pose();  
-                    // console.log(b);  
-                    j1.bombe.push(b);
-                    setTimeout(Fexp, 2000,b); 
                 }
->>>>>>> df249fa4c428a8cc14a05b30d4830a590bde0107
-                
-
+                else{
+                   j1.bombe.forEach(element=>{
+                        if(b.x != element.x || b.y != element.y){
+                            t = true;
+                        }
+                        else{
+                            t = false;
+                        }
+                    })
+                    if(t){
+                        b.pose();  
+                        // console.log(b);  
+                        j1.bombe.push(b);
+                        console.log(j1.bombe);
+                        setTimeout(Fexp, 2000,b);  
+                    }
+                }                
                 break;            
             case 37: // Gauche
                 moveLeft(j1.div);
@@ -115,27 +83,31 @@ document.getElementById('start').addEventListener("click", function(){          
 
     window.addEventListener("keydown", _listener)                                 // Déplacement Monstre
 
-    // let inter = setInterval(() => {
+    let inter = setInterval(() => {
 
-    //     let mv = rand(1,6,1);
-    //     let e = rand(0,6,1);
+        let mv = rand(1,6,1);
+        let e = rand(0,6,1);
 
-    //     switch (mv){
-    //         case 1:
-    //             moveUp(horde[e].div);
-    //             break;
-    //         case 2:
-    //             moveDown(horde[e].div);
-    //             break;
-    //         case 3:
-    //             moveLeft(horde[e].div);
-    //             break;
-    //         case 4:
-    //             moveRight(horde[e].div);
-    //             break;
-    //     }
+        switch (mv){
+            case 1:
+                moveUp(horde[e].div);
+                horde[e].y = parseInt(horde[e].div.style.top);
+                break;
+            case 2:
+                moveDown(horde[e].div);
+                horde[e].y = parseInt(horde[e].div.style.top);
+                break;
+            case 3:
+                moveLeft(horde[e].div);
+                horde[e].x = parseInt(horde[e].div.style.left);
+                break;
+            case 4:
+                moveRight(horde[e].div);
+                horde[e].x = parseInt(horde[e].div.style.left);
+                break;
+        }
             
-    // }, 200);
+    }, 200);
 
     document.getElementById('stop').addEventListener("click", function(){
 
@@ -157,6 +129,8 @@ document.getElementById('start').addEventListener("click", function(){          
 
     document.getElementById('reset').addEventListener("click",init);
 
+    document.getElementById('lp').innerHTML=j1.lp;
+
     
 });
 
@@ -169,7 +143,7 @@ function init(){                                                       // Initia
      j1 = new Player(document.getElementById('player'));
      i = 0;
 
-    for(let i = 0; i < 1 ; i++ )
+    for(let i = 0; i < 6 ; i++ )
     { 
         horde[i] = new Slime(document.getElementById('e'+(i+1)));
         // console.log(horde[i]);
@@ -193,6 +167,7 @@ function moveLeft(div){
 function moveUp(div){
     if(parseInt(div.style.top) > 0){
         div.style.top =parseInt(div.style.top)-50+'px';
+        
         if (div == j1.div){
             j1.y = parseInt(j1.div.style.top);
             j1.div.style.backgroundImage = "url('./assets/img/bomberman_top.png')";

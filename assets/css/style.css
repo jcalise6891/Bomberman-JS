@@ -80,6 +80,13 @@
 p{
     color:white;
     font-family: "myPixel",sans-serif;
+    text-align: center;
+    line-height: 6rem;
+}
+
+#lp{
+    color: #ff1616;
+    font-size: 4rem;
 }
 
 .game .stats{

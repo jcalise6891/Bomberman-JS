@@ -10,7 +10,7 @@ export default class Player{
         this.x = parseInt(this.div.style.left);
         this.y = parseInt(this.div.style.top);
         this.div.style.backgroundImage="url('./assets/img/bomberman_idle.png')";
-        this.lp = 1;
+        this.lp = 5;
     }
 
 }
